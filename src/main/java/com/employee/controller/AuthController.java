@@ -18,11 +18,11 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestParam String username, @RequestParam String contact) {
         String uniqueSessionId = UUID.randomUUID().toString();
         Map<String, Object> claims = new HashMap<>();
-        claims.put("uniquesessionid", uniqueSessionId);
+        claims.put("useruniqueid", uniqueSessionId);
         claims.put("contact", contact);
         String token = jwtUtil.generateToken(claims, username);
         return ResponseEntity.ok(Map.of(
